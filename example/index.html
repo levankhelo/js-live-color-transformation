@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>live color update js example</title>
+        <style>
+            .box {
+                height: 250px;
+                width: 250px;
+                padding: 100px;
+                margin: 25px;
+            }
+            #changeMe {
+                background-color: red;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="changeMe" class="box"></div>
+
+        <script src="../src/live-colors.js"></script>
+        <script>
+
+            var livecolors = new LiveColorsEngine;
+
+            let div = document.getElementById("changeMe");
+
+            console.log( livecolors.extract.background(div) )
+
+            
+        </script>
+    </body>
+</html>
