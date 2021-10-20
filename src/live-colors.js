@@ -252,6 +252,13 @@ class LiveColorsEngine extends _LiveColorsBase {
 				
 				current = master.extract.background(elem);
 				
+
+				/* TODO
+				 * 
+				 * update values using similar algorithm
+				 * -(Math.abs(current.r)-Math.abs(target.r))):(Math.abs(current.r)-Math.abs(target.r)),
+				 * but consider percentage and <1 to decrease with 1 when <1
+				 */
 				var change = {
 					"r": (current.r>=target.r)?((current.r==target.r)?0:-1):1,
 					"g": (current.g>=target.g)?((current.g==target.g)?0:-1):1,
