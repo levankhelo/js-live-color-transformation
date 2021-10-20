@@ -3,6 +3,15 @@
 class _LiveColorsBase {
 	constructor(){};
 
+	hex( str ) {
+
+		let converted = "";
+		var hex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec( str );
+		converted = "rgb(" + parseInt(hex[1],16) + "," + parseInt(hex[2],16) + "," + parseInt(hex[2],16) +")";
+
+		return this.rgb( converted )
+	}
+
 	rgb( str ) {
 		/* extract and returb rgb values from string
 		 * 
@@ -19,6 +28,10 @@ class _LiveColorsBase {
 		 * 			.rbfor value of blue color
 		 */
 
+		if( /^#([0-9A-F]{3}){1,2}$/i.test(str) ) {
+			return this.hex(str);
+
+		}
 
 		var rgb = {
 			"r": null,
@@ -138,7 +151,7 @@ class LiveColorsEngine extends _LiveColorsBase {
 
 		/*** private function ***/
 		function printAuthor() {
-			console.log("live colors engine initialized.\n\tCreated by: " + author);
+			if(this.logs) console.log("live colors engine initialized.\n\tCreated by: " + author);
 		}
 
 		function pushHistory(value) {
@@ -245,7 +258,7 @@ class LiveColorsEngine extends _LiveColorsBase {
 				
 				obj.element.style.backgroundColor = "rgb(" + (current.r+change.r) + "," + (current.g+change.g) + "," + (current.b+change.b) + ")"
 
-				console.log(change, current, target, (change.r + change.g + change.b) == 0)
+				if(this.logs) console.log(change, current, target, (change.r + change.g + change.b) == 0)
 
 				if( (change.r + change.g + change.b) == 0) {
 					window.cancelAnimationFrame( animateBackground_AnimationFrame );
