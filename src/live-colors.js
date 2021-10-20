@@ -144,14 +144,16 @@ class LiveColorsEngine extends _LiveColorsBase {
 		const author = "Levan Khelashvili";
 
 		/*** public variables ***/
-		var history = new Array;
+		this.history = new Array;
+		this.logs = false;
+
 
 		/*** private subclasses ***/
 		
 
 		/*** private function ***/
 		function printAuthor() {
-			if(this.logs) console.log("live colors engine initialized.\n\tCreated by: " + author);
+			if(master.logs) console.log("live colors engine initialized.\n\tCreated by: " + author);
 		}
 
 		function pushHistory(value) {
@@ -253,12 +255,12 @@ class LiveColorsEngine extends _LiveColorsBase {
 				var change = {
 					"r": (current.r>=target.r)?((current.r==target.r)?0:-1):1,
 					"g": (current.g>=target.g)?((current.g==target.g)?0:-1):1,
-					"b": (current.b>=target.b)?((current.b==target.b)?0:-1):11
+					"b": (current.b>=target.b)?((current.b==target.b)?0:-1):1
 				}
 				
 				obj.element.style.backgroundColor = "rgb(" + (current.r+change.r) + "," + (current.g+change.g) + "," + (current.b+change.b) + ")"
 
-				if(this.logs) console.log(change, current, target, (change.r + change.g + change.b) == 0)
+				if(master.logs) console.log(change, current, target, (change.r + change.g + change.b) == 0)
 
 				if( (change.r + change.g + change.b) == 0) {
 					window.cancelAnimationFrame( animateBackground_AnimationFrame );
